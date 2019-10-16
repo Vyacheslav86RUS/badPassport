@@ -9,39 +9,42 @@ $url - адрес, где расположен файл
 $db - объект подключения к БД
 
 ```php
-        $import = new FmsImport(
-            new FmsUnzip(new FmsDownload($url, $dir)),
-            $db
-        );
+$import = new FmsImport(
+    new FmsUnzip(new FmsDownload($url, $dir)),
+    $db
+);
 
-        $importProcess = $import->unlockOldActiveImportProcess();
+$importProcess = $import->unlockOldActiveImportProcess();
 
-        if ($importProcess) {
-            echo $importProcess . ' процессов завершили работу' . PHP_EOL;
-        }
+if ($importProcess) {
+    echo $importProcess . ' процессов завершили работу' . PHP_EOL;
+}
 
-        echo 'Проверяем изменения файла' . PHP_EOL;
-        if (!$import->isFileModified()) {
-            echo 'Файл не изменялся' . PHP_EOL;
+echo 'Проверяем изменения файла' . PHP_EOL;
+        
+if (!$import->isFileModified()) {
+    echo 'Файл не изменялся' . PHP_EOL;
 
-            return 1;
-        }
+    return 1;
+        
+}
 
-        echo 'Проверяем, запущенные процессы' . PHP_EOL;
+echo 'Проверяем, запущенные процессы' . PHP_EOL;
 
-        if ($import->hasActiveImportProcess()) {
-            echo 'Происходит импорт данных, попробуйте позжe' . PHP_EOL;
+if ($import->hasActiveImportProcess()) {
+    echo 'Происходит импорт данных, попробуйте позжe' . PHP_EOL;
 
-            return 1;
-        }
+    return 1;
+}
 
-        if ($import->import()) {
-            echo 'Данные импортированы' . PHP_EOL;
+if ($import->import()) {
+    echo 'Данные импортированы' . PHP_EOL;
 
-            return 1;
-        }
+    return 1;
+}
 
-        echo 'Произошла ошибка импорта' . PHP_EOL;
+echo 'Произошла ошибка импорта' . PHP_EOL;
 
-        return 0;
+return 0;
+
 ```
