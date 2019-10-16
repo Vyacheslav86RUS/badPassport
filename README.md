@@ -8,6 +8,7 @@ $dir - путь, куда будет скачиваться файл
 $url - адрес, где расположен файл
 $db - объект подключения к БД
 
+```php
         $import = new FmsImport(
             new FmsUnzip(new FmsDownload($url, $dir)),
             $db
@@ -43,4 +44,4 @@ $db - объект подключения к БД
         echo 'Произошла ошибка импорта' . PHP_EOL;
 
         return 0;
-
+```
